@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Story Details</title>
+    <link href="story-styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="story.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img alt="Pratilipi logo"
+                    src="https://storage.googleapis.com/a1aa/image/FUEcEYg9OpojRbwRp8Dlbw2oC3LGWhaAQfISRLLf4AQ.jpg"
+                    width="40" height="40" />
+                <span>Pratilipi</span>
+            </div>
+            <div class="nav-controls">
+                <nav>
+                    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="story-details">
+            <div class="story-header">
+                <img id="story-cover" alt="Story cover" class="story-cover" />
+                <div class="story-info">
+                    <h1 id="story-title" class="story-title"></h1>
+                    <div class="story-meta">
+                        <span id="story-rating" class="rating"><i class="fas fa-star"></i></span>
+                        <span id="story-readers" class="readers"><i class="fas fa-users"></i></span>
+                        <span id="story-parts" class="parts"><i class="fas fa-book-open"></i></span>
+                    </div>
+                    <div class="story-actions">
+                        <button class="btn-primary"><i class="fas fa-book-reader"></i> Read Now</button>
+                        <button class="btn-secondary"><i class="fas fa-bookmark"></i> Add to Library</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-content">
+                <h2>Synopsis</h2>
+                <p id="story-synopsis" class="synopsis"></p>
+
+                <h2>Chapters</h2>
+                <div id="chapters-list" class="chapters-list">
+                    <!-- Chapters will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html> 

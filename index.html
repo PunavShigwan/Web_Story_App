@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Read English Stories
+    </title>
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#007bff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Pratilipi" />
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+
+    <link href="styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Offline notification -->
+    <div id="offline-message" class="offline-message" style="display: none;">
+        You are currently offline. Some features may be limited.
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img alt="Pratilipi logo"
+                    src="icons/icon-72x72.png"
+                    width="40" height="40" />
+                <span>Pratilipi</span>
+            </div>
+            <div class="nav-controls">
+                <button class="language-button">
+                    English
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="search-container">
+                    <input class="search-input" type="text" placeholder="Search for your desired Stories" />
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <nav>
+                    <a href="#"><i class="fas fa-home"></i> Home</a>
+                    <a href="#">Category</a>
+                    <a href="#">Write</a>
+                    <a href="#">Sign In</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="page-title">
+            Read English Stories
+        </h1>
+        <p class="subtitle">
+            A World of Stories
+        </p>
+
+        <!-- Install prompt for PWA -->
+        <div id="install-prompt" class="install-prompt" style="display: none;">
+            <p>Install Pratilipi for a better reading experience!</p>
+            <button id="install-button">Install App</button>
+            <button id="close-prompt" aria-label="Close prompt">×</button>
+        </div>
+
+        <section>
+            <h2 class="section-title">
+                Top Trending Series
+            </h2>
+
+            <div class="stories-grid">
+                <!-- Story cards will be added here dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- PWA Installation Script -->
+    <script>
+        let deferredPrompt;
+
+        // Check if service worker is supported
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+
+        // Handle PWA install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('install-prompt').style.display = 'block';
+        });
+
+        // Handle install button click
+        document.getElementById('install-button').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to install prompt: ${outcome}`);
+                deferredPrompt = null;
+                document.getElementById('install-prompt').style.display = 'none';
+            }
+        });
+
+        // Handle close button click
+        document.getElementById('close-prompt').addEventListener('click', () => {
+            document.getElementById('install-prompt').style.display = 'none';
+        });
+
+        // Handle online/offline status
+        window.addEventListener('online', () => {
+            document.getElementById('offline-message').style.display = 'none';
+        });
+
+        window.addEventListener('offline', () => {
+            document.getElementById('offline-message').style.display = 'block';
+        });
+    </script>
+
+    <!-- Add these styles to your CSS file -->
+    <style>
+        .offline-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            z-index: 1000;
+        }
+
+        .install-prompt {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .install-prompt button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #install-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #close-prompt {
+            background: none;
+            font-size: 24px;
+            padding: 0 8px;
+        }
+
+        @media (display-mode: standalone) {
+            .install-prompt {
+                display: none !important;
+            }
+        }
+    </style>
+</body>
+
+</html>

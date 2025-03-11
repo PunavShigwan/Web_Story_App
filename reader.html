@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Reading Chapter</title>
+    <link href="reader-styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="reader.js" defer></script>
+</head>
+
+<body>
+    <header class="reader-header">
+        <div class="header-left">
+            <a href="story.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+            <h1 id="story-title" class="story-title">Story Title</h1>
+        </div>
+        <div class="header-right">
+            <button class="settings-button" onclick="toggleSettings()">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="reader-settings" id="settings-panel">
+        <h3>Reading Settings</h3>
+        <div class="setting-group">
+            <label>Font Size</label>
+            <div class="font-size-controls">
+                <button onclick="changeFontSize('decrease')">A-</button>
+                <button onclick="changeFontSize('increase')">A+</button>
+            </div>
+        </div>
+        <div class="setting-group">
+            <label>Theme</label>
+            <div class="theme-controls">
+                <button onclick="changeTheme('light')" class="theme-button light">Light</button>
+                <button onclick="changeTheme('sepia')" class="theme-button sepia">Sepia</button>
+                <button onclick="changeTheme('dark')" class="theme-button dark">Dark</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="reader-container">
+        <div class="chapter-navigation">
+            <button id="prev-chapter" class="nav-button" onclick="navigateChapter('prev')">
+                <i class="fas fa-chevron-left"></i> Previous Chapter
+            </button>
+            <span id="chapter-info">Chapter 1</span>
+            <button id="next-chapter" class="nav-button" onclick="navigateChapter('next')">
+                Next Chapter <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <article id="chapter-content" class="chapter-content">
+            <!-- Chapter content will be loaded dynamically -->
+        </article>
+
+        <div class="chapter-navigation bottom">
+            <button id="prev-chapter-bottom" class="nav-button" onclick="navigateChapter('prev')">
+                <i class="fas fa-chevron-left"></i> Previous Chapter
+            </button>
+            <button id="next-chapter-bottom" class="nav-button" onclick="navigateChapter('next')">
+                Next Chapter <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+</body>
+
+</html> 
